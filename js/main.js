@@ -4,19 +4,27 @@ var Song = Backbone.Model.extend({
     },
     initialize: function(){
         console.log("new song");
+    },
+    validate: function(attrs){
+        if(!attrs.title){
+            return "Title is required"; 
+        }
     }
 });
 
 var song = new Song();
-song.set("title", "El santo cachon");
 
-var song2 = new Song();
-song2.set({
-    "artist": "Diomedez",
-    "title": "Los recuerdos de ella"
+var Animal = Backbone.Model.extend({
+    walk: function(){
+        console.log("Animal Walking");
+    }
+});
+
+var Dog = Animal.extend({
+    walk: function(){
+        Animal.prototype.walk(this);
+        console.log("Dog walking");
+    }
 })
 
-var song3 = new Song({
-    artist: "Maluma",
-    title: "felices los 4"
-});
+var dog = new Dog();
